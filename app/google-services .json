@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "41521537298",
+    "project_id": "arapplication-af2dc",
+    "storage_bucket": "arapplication-af2dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41521537298:android:c1ce40dee16355099853cb",
+        "android_client_info": {
+          "package_name": "com.example.arapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41521537298-i8p36egvmo60mojc5mjtcnbe3svfh0lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHH1-yuml2yN-wumO69HAzLeghDO5kVOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41521537298-i8p36egvmo60mojc5mjtcnbe3svfh0lo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

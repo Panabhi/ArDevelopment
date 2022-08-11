@@ -24,15 +24,22 @@
         android:theme="@style/Theme.ArApplication"
         tools:targetApi="31">
         <activity
-            android:name=".LauncherActivity"
+            android:name=".Nav_Header"
+            android:exported="false" />
+        <activity
+            android:name=".AfterLauncherActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
+            android:name=".LauncherActivity"
+            android:exported="true">
 
-            </activity>
+        </activity>
 
         <meta-data
             android:name="com.google.ar.core"
@@ -40,9 +47,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

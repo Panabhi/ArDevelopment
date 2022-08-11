@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom" />
+    <item android:id="@+id/search_voice_btn"
+        android:title=""
+        android:icon="@drawable/voice"
+        app:showAsAction="collapseActionView|ifRoom" />
 
         <item
             android:id="@+id/About_Us"

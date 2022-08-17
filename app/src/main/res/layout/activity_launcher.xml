@@ -4,49 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LauncherActivity">
+    tools:context=".LauncherActivity"
+    android:background="@drawable/launcherimage">
 
-    <ImageView
-        android:id="@+id/img_open"
-        android:layout_width="203dp"
-        android:layout_height="148dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/asset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
 
     <TextView
         android:id="@+id/txt_bottom"
-        android:layout_width="173dp"
-        android:layout_height="33dp"
-        android:layout_below="@+id/img_open"
+        android:layout_width="299dp"
+        android:layout_height="117dp"
         android:layout_centerHorizontal="true"
-        android:fontFamily="monospace"
+        android:fontFamily="cursive"
         android:text="Vidyurv"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textColor="#ffff33"
+        android:textSize="100sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.418" />
+        app:layout_constraintVertical_bias="0.138" />
 
     <TextView
         android:id="@+id/txt_bo"
-        android:layout_width="348dp"
-        android:layout_height="38dp"
-        android:layout_below="@+id/img_open"
+        android:layout_width="262dp"
+        android:layout_height="123dp"
         android:layout_centerHorizontal="true"
-        android:fontFamily="monospace"
+        android:fontFamily="cursive"
         android:text="Education for Imagination"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textColor="#368BC1"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.911"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.846" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

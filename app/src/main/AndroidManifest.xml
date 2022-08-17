@@ -18,30 +18,33 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app"
+        android:roundIcon="@drawable/vyv"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArApplication"
         tools:targetApi="31">
         <activity
             android:name=".VoicePresentActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Nav_Header"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AfterLauncherActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".LauncherActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity
-            android:name=".LauncherActivity"
-            android:exported="true"></activity>
+
 
         <meta-data
             android:name="com.google.ar.core"
@@ -50,6 +53,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+
     </application>
 
 </manifest>

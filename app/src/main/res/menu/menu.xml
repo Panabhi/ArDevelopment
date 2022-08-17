@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <item android:id="@+id/search"
-        android:title="@string/search_title"
+        android:title="Text Search"
         android:icon="@drawable/ic_search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="collapseActionView|ifRoom" />
+        app:showAsAction="ifRoom|collapseActionView" />
     <item android:id="@+id/search_voice_btn"
-        android:title=""
-        android:icon="@drawable/voice"
-        app:showAsAction="collapseActionView|ifRoom" />
+        android:title="Voice Search"
+        android:icon="@drawable/voice1"
+        app:showAsAction="ifRoom" />
 
-        <item
-            android:id="@+id/About_Us"
-            android:icon="@drawable/ic_baseline_info_24"
-            android:title="@string/About_us"/>
+    <item
+        android:id="@+id/About_Us"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/About_us"/>
 
 
 </menu>

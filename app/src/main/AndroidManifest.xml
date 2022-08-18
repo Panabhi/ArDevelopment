@@ -19,6 +19,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:label="@string/app"
+        android:icon="@drawable/vyv"
         android:roundIcon="@drawable/vyv"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArApplication"

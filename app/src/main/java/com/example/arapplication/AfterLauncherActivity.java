@@ -1,34 +1,41 @@
 package com.example.arapplication;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.camera.core.Camera;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
+import androidx.camera.core.ImageProxy;
+import androidx.camera.core.Preview;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.Visibility;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Size;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,20 +53,44 @@ import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.pytorch.IValue;
+import org.pytorch.Module;
+import org.pytorch.Tensor;
+import org.pytorch.torchvision.TensorImageUtils;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class AfterLauncherActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
+    MaterialToolbar toolbar;
+    private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
+    private int REQUEST_CODE_PERMISSION = 101;
+    private final String[] REQUIRED_PERMISSIONS = new String[] {"android.permission.CAMERA"};
+    PreviewView previewView;
     DrawerLayout drawerLayout;
+    List<String> imagenet_classes;
     FrameLayout frameLayout;
     ModelAdapter modelAdapter;
+    MenuItem scanimage;
+    Module module;
     ProgressDialog progressDialog;
     ArrayList<ModelClass> modelClassArrayList;
     RecyclerView recyclerView;
@@ -68,6 +99,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
     TextView txtsuntemple;
     EditText search_action;
     Button search_voice_btn;
+    Executor executor = Executors.newSingleThreadExecutor();
 
 
     ListView listView;
@@ -81,6 +113,8 @@ public class AfterLauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_launcher);
+
+        //previewView = findViewById(R.id.preview);
 
 
         relative1 = findViewById(R.id.relative1);
@@ -125,11 +159,11 @@ public class AfterLauncherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
-        });*/
+        });
         //EventChangeListener();
-        // modelAdapter = new ModelAdapter(AfterLauncherActivity.this, modelClassArrayList);
+        //modelAdapter = new ModelAdapter(AfterLauncherActivity.this, modelClassArrayList);
         //search_action = findViewById(R.id.search);
-       /* search_action.addTextChangedListener(new TextWatcher() {
+        /*search_action.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -148,13 +182,6 @@ public class AfterLauncherActivity extends AppCompatActivity {
         //recyclerView.setAdapter(modelAdapter);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        new MenuInflater(this).inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -298,6 +325,22 @@ public class AfterLauncherActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        scanimage = menu.findItem(R.id.scanimage);
+        scanimage.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(AfterLauncherActivity.this,ScannerActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+        return true;
+    }
 
     private void replaceFragment(Fragment fragment, String name) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -360,7 +403,9 @@ public class AfterLauncherActivity extends AppCompatActivity {
             }
         }
         myAdapter.filterList(filterList);
-        }*/
-    }
+    }*/
+
+
+}
 
 

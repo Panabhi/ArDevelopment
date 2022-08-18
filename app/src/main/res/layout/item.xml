@@ -1,56 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
 
-    <GridLayout
-        android:id="@+id/gridlayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bgcolor"
-        android:columnCount="1">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/modelcardview"
-        android:layout_width="170dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="10dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="5dp"
-        app:cardMaxElevation="5dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
-
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imgmodel"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <RelativeLayout
-            android:id="@+id/relative1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp">
-
-            <ImageView
-                android:id="@+id/modelimage"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_baseline_info_24" />
-
+            android:layout_height="match_parent">
             <TextView
-                android:id="@+id/txtmodelname"
+                android:id="@+id/txtdesc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/modelimage"
-                android:layout_alignParentBottom="true"
-                android:gravity="center"
-                android:text="Model Name"
-                android:textSize="18sp" />
-
+                android:layout_height="match_parent"/>
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-    </GridLayout>
-
-
-
+    </LinearLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

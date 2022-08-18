@@ -15,10 +15,15 @@
         android:icon="@drawable/voice1"
         app:showAsAction="ifRoom" />
 
+        <item
+            android:id="@+id/About_Us"
+            android:icon="@drawable/ic_baseline_info_24"
+            android:title="@string/About_us"/>
     <item
-        android:id="@+id/About_Us"
-        android:icon="@drawable/ic_baseline_info_24"
-        android:title="@string/About_us"/>
+        android:id="@+id/scanimage"
+        android:icon="@drawable/ic_image_scan"
+        android:title="Scan Image"
+        app:showAsAction="ifRoom"/>
 
 
 </menu>

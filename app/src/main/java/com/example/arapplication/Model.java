@@ -2,7 +2,16 @@ package com.example.arapplication;
 
 public class Model {
     String image;
-    String name;
+
+    public String getModel_name() {
+        return model_name;
+    }
+
+    public void setModel_name(String model_name) {
+        this.model_name = model_name;
+    }
+
+    String model_name;
 
     public Model(){}
     public String getImage() {
@@ -13,11 +22,4 @@ public class Model {
         this.image = image;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

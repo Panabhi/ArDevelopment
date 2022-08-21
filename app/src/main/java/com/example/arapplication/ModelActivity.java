@@ -22,17 +22,18 @@ import java.util.ArrayList;
 
 public class ModelActivity extends AppCompatActivity {
 
-    ArrayList<Model> modelArrayList;
-    ModelAdapter modelAdapter;
+    ArrayList<ModelData> modelArrayList;
+    DataAdapter dataAdapter;
     FirebaseFirestore fb;
     RecyclerView recyclerView;
     ProgressDialog progressDialog;
+    Intent intent = getIntent();
     Button launch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_model);
-
+        String nameofmodel = intent.getStringExtra("model_name").toString();
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading");
@@ -42,23 +43,24 @@ public class ModelActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         fb = FirebaseFirestore.getInstance();
-        modelArrayList = new ArrayList<Model>();
-        modelAdapter = new ModelAdapter(this,modelArrayList);
+        modelArrayList = new ArrayList<ModelData>();
+        dataAdapter = new DataAdapter(this,modelArrayList);
 
         launch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ModelActivity.this,MainActivity.class);
+                intent.putExtra("model_name",nameofmodel);
                 startActivity(intent);
             }
         });
         ModelEventListener();
 
-        recyclerView.setAdapter(modelAdapter);
+        recyclerView.setAdapter(dataAdapter);
     }
 
     private void ModelEventListener() {
-        fb.collection("model1").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        fb.collection("model_history").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
            if(error!=null)
@@ -72,9 +74,9 @@ public class ModelActivity extends AppCompatActivity {
            {
                if(dc.getType() == DocumentChange.Type.ADDED)
                {
-                   modelArrayList.add(dc.getDocument().toObject(Model.class));
+                   modelArrayList.add(dc.getDocument().toObject(ModelData.class));
                }
-               modelAdapter.notifyDataSetChanged();
+               dataAdapter.notifyDataSetChanged();
                if (progressDialog.isShowing())
                    progressDialog.dismiss();
            }

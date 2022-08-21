@@ -3,13 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_after_launcher.xml" value="0.25416666666666665" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_launcher.xml" value="0.25416666666666665" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_model.xml" value="0.2" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_scanner.xml" value="0.1" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/item.xml" value="0.25416666666666665" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/menu/menu.xml" value="0.25025641025641027" />
+        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_after_launcher.xml" value="0.25025641025641027" />
+        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_launcher.xml" value="0.25025641025641027" />
+        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_model.xml" value="0.11302083333333333" />
+        <entry key="..\:/ArDevelopment/app/src/main/res/layout/dataitem.xml" value="0.15729166666666666" />
+        <entry key="..\:/ArDevelopment/app/src/main/res/layout/item.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApplication2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1445" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApplication2/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1445" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApplication2/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1445" />
@@ -25,6 +23,7 @@
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApplication2/app/src/main/res/layout/item.xml" value="0.28541666666666665" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApplication2/app/src/main/res/layout/style.xml" value="0.1068840579710145" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApplication2/app/src/main/res/menu/menu.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/SATYAM/sih18pt/ArDevelopment/app/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>
   </component>

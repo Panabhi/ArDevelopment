@@ -10,36 +10,36 @@
 
     <TextView
         android:id="@+id/txt_bottom"
-        android:layout_width="299dp"
-        android:layout_height="117dp"
+        android:layout_width="217dp"
+        android:layout_height="115dp"
         android:layout_centerHorizontal="true"
         android:fontFamily="cursive"
         android:text="Vidyurv"
         android:textAlignment="center"
         android:textColor="#ffff33"
-        android:textSize="100sp"
+        android:textSize="70sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.138" />
+        app:layout_constraintVertical_bias="0.151" />
 
     <TextView
         android:id="@+id/txt_bo"
-        android:layout_width="262dp"
-        android:layout_height="123dp"
+        android:layout_width="215dp"
+        android:layout_height="131dp"
         android:layout_centerHorizontal="true"
         android:fontFamily="cursive"
         android:text="Education for Imagination"
         android:textAlignment="center"
         android:textColor="#368BC1"
-        android:textSize="50sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.911"
+        app:layout_constraintHorizontal_bias="0.989"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintVertical_bias="0.92" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

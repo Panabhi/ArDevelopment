@@ -1,5 +1,13 @@
 package com.example.arapplication;
 
+
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.util.Size;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.Camera;
@@ -12,13 +20,6 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
-
-import android.annotation.SuppressLint;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.util.Size;
-import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -42,17 +43,16 @@ import java.util.concurrent.Executors;
 public class ScannerActivity extends AppCompatActivity {
 
     PreviewView previewView;
-    private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
+    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private int REQUEST_CODE_PERMISSION = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[] {"android.permission.CAMERA"};
     List<String> imagenet_classes;
-    Module module;
-    Executor executor = Executors.newSingleThreadExecutor();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        previewView = findViewById(R.id.preview);
+       previewView = findViewById(R.id.cameraview);
         setContentView(R.layout.activity_scanner);
         if(!checkPermissions()){
             ActivityCompat.requestPermissions(this,REQUIRED_PERMISSIONS,REQUEST_CODE_PERMISSION);
@@ -61,15 +61,17 @@ public class ScannerActivity extends AppCompatActivity {
         imagenet_classes = LoadClasses("imagenet-classes.txt");
         loadtorchModel("model.ptl");
 
-        cameraProviderListenableFuture = ProcessCameraProvider.getInstance(ScannerActivity.this);
-        cameraProviderListenableFuture.addListener(() -> {
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+        cameraProviderFuture.addListener(() -> {
             try {
-                ProcessCameraProvider cameraProvider = cameraProviderListenableFuture.get();
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
                 startcamera(cameraProvider);
+                //start camera
             }catch (ExecutionException | InterruptedException e){
-
+                //ERRORS
             }
-        },ContextCompat.getMainExecutor(ScannerActivity.this));
+        }, ContextCompat.getMainExecutor(ScannerActivity.this));
+
     }
     private boolean checkPermissions()
     {
@@ -81,9 +83,12 @@ public class ScannerActivity extends AppCompatActivity {
         return true;
     }
 
+    Executor executor = Executors.newSingleThreadExecutor();
+
     void startcamera(@NonNull ProcessCameraProvider cameraProvider){
         Preview preview = new Preview.Builder().build();
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
+        preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
         ImageAnalysis imageAnalysis = new ImageAnalysis.Builder().setTargetResolution(new Size(224,224))
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
@@ -96,11 +101,12 @@ public class ScannerActivity extends AppCompatActivity {
                 analyzeImage(image,rotation);
                 image.close();
             }
+
         });
         Camera camera = cameraProvider.bindToLifecycle((LifecycleOwner) this,cameraSelector,preview);
     }
 
-
+    Module module;
     void loadtorchModel(String fileName){
         File modelFile = new File(this.getFilesDir(),fileName);
         try{
@@ -120,7 +126,7 @@ public class ScannerActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    void analyzeImage(ImageProxy image,int rotation){
+    void analyzeImage(ImageProxy image, int rotation){
         @SuppressLint("UnsafeOptInUsageError") Tensor inputTensor = TensorImageUtils.imageYUV420CenterCropToFloat32Tensor(image.getImage(),rotation,224,224,
                 TensorImageUtils.TORCHVISION_NORM_MEAN_RGB,TensorImageUtils.TORCHVISION_NORM_STD_RGB);
 
@@ -141,7 +147,7 @@ public class ScannerActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(ScannerActivity.this,classResult,Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScannerActivity.this,classResult, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -161,4 +167,4 @@ public class ScannerActivity extends AppCompatActivity {
         }
         return classes;
     }
-}
+    }

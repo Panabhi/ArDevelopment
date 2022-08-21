@@ -6,11 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".VoicePresentActivity">
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnmodel"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:text="Load 3D Model"
-        android:layout_centerInParent="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginStart="333dp"
+        android:layout_marginTop="650dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/download"
+        android:text="Load 3D Model" />
 
 </RelativeLayout>

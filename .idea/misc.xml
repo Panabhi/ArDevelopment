@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_after_launcher.xml" value="0.25416666666666665" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_launcher.xml" value="0.25416666666666665" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_model.xml" value="0.2" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/activity_scanner.xml" value="0.1" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/layout/item.xml" value="0.25416666666666665" />
-        <entry key="..\:/ArDevelopment/app/src/main/res/menu/menu.xml" value="0.25025641025641027" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/layout/activity_after_launcher.xml" value="0.11018518518518519" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/layout/activity_launcher.xml" value="0.11018518518518519" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/layout/activity_main.xml" value="0.1203125" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/layout/activity_model.xml" value="0.1125" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/layout/activity_nav_header.xml" value="0.1125" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/layout/activity_scanner.xml" value="0.1203125" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/layout/activity_voice_present.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/layout/fragment_about.xml" value="0.1125" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/layout/item.xml" value="0.11018518518518519" />
+        <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApp/ArDevelopment/app/src/main/res/menu/menu.xml" value="0.1619047619047619" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApplication2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1445" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApplication2/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1445" />
         <entry key="..\:/Users/ABHISHEK/AndroidStudioProjects/ArApplication2/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1445" />

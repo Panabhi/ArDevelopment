@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
@@ -80,7 +81,7 @@ import java.util.concurrent.Executors;
 
 public class AfterLauncherActivity extends AppCompatActivity {
 
-    MaterialToolbar toolbar;
+    Toolbar toolbar;
     private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
     private int REQUEST_CODE_PERMISSION = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[] {"android.permission.CAMERA"};
@@ -202,11 +203,18 @@ public class AfterLauncherActivity extends AppCompatActivity {
 
         } else if (itemId == R.id.search) {
             Toast.makeText(this, "text Search", Toast.LENGTH_SHORT);
-        } else {
+        }else if(itemId == R.id.scanimage){
+            Intent intent=new Intent(AfterLauncherActivity.this,ScannerActivity.class);
+            startActivity(intent);
+
+        }
+        else {
             super.onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     private void initclicklistners() {
         relative1.setOnClickListener(new View.OnClickListener() {
@@ -329,18 +337,8 @@ public class AfterLauncherActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
-
-        scanimage = menu.findItem(R.id.scanimage);
-        scanimage.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(AfterLauncherActivity.this,ScannerActivity.class);
-                startActivity(intent);
                 return true;
             }
-        });
-        return true;
-    }
 
     private void replaceFragment(Fragment fragment, String name) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -404,8 +402,6 @@ public class AfterLauncherActivity extends AppCompatActivity {
         }
         myAdapter.filterList(filterList);
     }*/
-
-
 }
 
 

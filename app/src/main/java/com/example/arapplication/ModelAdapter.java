@@ -11,10 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> {
 
+    String urlimage;
     Context context;
     ArrayList<Model> modelArrayList;
     ItemClickListener itemClickListener;
@@ -35,10 +38,12 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ModelAdapter.ViewHolder holder, int position) {
         Model model = modelArrayList.get(position);
+        urlimage =  model.url;
         holder.modelname.setText(model.model_name);
         holder.itemView.setOnClickListener(view -> {
             itemClickListener.OnItemClick(modelArrayList.get(position));
         });
+        Picasso.with(context).load(urlimage).into(holder.imgmodel);
     }
 
     @Override

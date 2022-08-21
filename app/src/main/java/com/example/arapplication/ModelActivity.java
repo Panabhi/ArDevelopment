@@ -27,13 +27,15 @@ public class ModelActivity extends AppCompatActivity {
     FirebaseFirestore fb;
     RecyclerView recyclerView;
     ProgressDialog progressDialog;
-    Intent intent = getIntent();
+
     Button launch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_model);
-        String nameofmodel = intent.getStringExtra("model_name").toString();
+
+
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading");
@@ -46,11 +48,15 @@ public class ModelActivity extends AppCompatActivity {
         modelArrayList = new ArrayList<ModelData>();
         dataAdapter = new DataAdapter(this,modelArrayList);
 
+
+        Intent intent = getIntent();
+        String modelName= intent.getStringExtra("model_name").toString();
+
         launch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ModelActivity.this,MainActivity.class);
-                intent.putExtra("model_name",nameofmodel);
+                intent.putExtra("model_name",modelName);
                 startActivity(intent);
             }
         });

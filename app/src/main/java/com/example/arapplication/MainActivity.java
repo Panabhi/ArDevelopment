@@ -23,7 +23,7 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
 
 
-    String getmodelname;
+    String modelname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        getmodelname = intent.getStringExtra("model_name").toString();
+        modelname = intent.getStringExtra("model_name").toString();
         FirebaseApp.initializeApp(this);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference modelRef=storage.getReference().child(getmodelname+".glb");
+        StorageReference modelRef=storage.getReference().child(modelname+".glb");
 
 
         ArFragment arFragment= (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
         findViewById(R.id.button).setOnClickListener(v->{
 
                     try {
-                        File file= File.createTempFile(getmodelname,"glb");
+                        File file= File.createTempFile(modelname,"glb");
                         modelRef.getFile(file).addOnSuccessListener(taskSnapshot -> buildModel(file));
 
                     } catch (IOException e) {

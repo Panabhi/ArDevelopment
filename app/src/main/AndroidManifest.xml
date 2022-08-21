@@ -30,8 +30,8 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:label="@string/app"
-        android:icon="@drawable/vyv"
-        android:roundIcon="@drawable/vyv"
+        android:icon="@drawable/icon"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArApplication"
         tools:targetApi="31">

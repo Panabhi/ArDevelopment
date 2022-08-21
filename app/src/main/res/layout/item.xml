@@ -7,8 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bgcolor"
-        android:columnCount="2"
-        android:rowCount="7">
+        android:columnCount="2">
     <androidx.cardview.widget.CardView
         android:id="@+id/modelcard"
         android:layout_width="170dp"

@@ -46,8 +46,8 @@ public class ScannerActivity extends AppCompatActivity {
     private int REQUEST_CODE_PERMISSION = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[] {"android.permission.CAMERA"};
     List<String> imagenet_classes;
-    Module module;
-    Executor executor = Executors.newSingleThreadExecutor();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,7 @@ public class ScannerActivity extends AppCompatActivity {
             }
         },ContextCompat.getMainExecutor(ScannerActivity.this));
     }
+
     private boolean checkPermissions()
     {
         for(String permission: REQUIRED_PERMISSIONS){
@@ -81,6 +82,7 @@ public class ScannerActivity extends AppCompatActivity {
         return true;
     }
 
+    Executor executor = Executors.newSingleThreadExecutor();
     void startcamera(@NonNull ProcessCameraProvider cameraProvider){
         Preview preview = new Preview.Builder().build();
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
@@ -120,6 +122,8 @@ public class ScannerActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    Module module;
     void analyzeImage(ImageProxy image,int rotation){
         @SuppressLint("UnsafeOptInUsageError") Tensor inputTensor = TensorImageUtils.imageYUV420CenterCropToFloat32Tensor(image.getImage(),rotation,224,224,
                 TensorImageUtils.TORCHVISION_NORM_MEAN_RGB,TensorImageUtils.TORCHVISION_NORM_STD_RGB);

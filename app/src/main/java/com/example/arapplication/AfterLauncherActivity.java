@@ -72,12 +72,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_after_launcher);
 
         listView = findViewById(R.id.listview);
-        //previewView = findViewById(R.id.preview);
 
-
-        //initialize();
-        //initclicklistners();
-//         getActionBar().hide();
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
          progressDialog.setMessage("Loading List");
@@ -85,10 +80,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        /*if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            toolbar.setTitle("VIDURV");
-        }*/
+
         recyclerView= findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -99,14 +91,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         {
             setSupportActionBar(toolbar);
         }
-        /*drawerLayout = findViewById(R.id.drawerLayout);
-        //  Toast.makeText(AfterLoginActivity.this,"Dashboard",Toast.LENGTH_SHORT).show();
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });*/
+
         EventChangeListener();
         modelAdapter = new ModelAdapter(AfterLauncherActivity.this, modelClassArrayList, new ModelAdapter.ItemClickListener() {
             @Override
@@ -123,20 +108,6 @@ public class AfterLauncherActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,filterList);
         listView.setAdapter(adapter);
     }
-
-    /*private void initialize() {
-        relative1 = findViewById(R.id.relative1);
-        relative2 = findViewById(R.id.relative2);
-        relative3 = findViewById(R.id.relative3);
-        relative4 = findViewById(R.id.relative4);
-        relative5 = findViewById(R.id.relative5);
-        relative6 = findViewById(R.id.relative6);
-        relative7 = findViewById(R.id.relative7);
-        relative8 = findViewById(R.id.relative8);
-        relative9 = findViewById(R.id.relative9);
-        relative10 = findViewById(R.id.relative10);
-    }*/
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -163,98 +134,6 @@ public class AfterLauncherActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*private void initclicklistners() {
-        relative1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "sunTemple");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Sun Temple", Toast.LENGTH_SHORT).show();
-            }
-        });
-        relative2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "RedFort");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Red Fort", Toast.LENGTH_SHORT).show();
-            }
-        });
-        relative3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "IndiaGate");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "India Gate", Toast.LENGTH_SHORT).show();
-            }
-        });
-        relative4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "Qutub Minar");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Qutub Minar", Toast.LENGTH_SHORT).show();
-            }
-        });
-        relative5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "GatewayofIndia");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Gateway of India", Toast.LENGTH_SHORT).show();
-            }
-        });
-        relative6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "mysore palace");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Mysore Palace", Toast.LENGTH_SHORT).show();
-            }
-        });
-        relative7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "moti masjid");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Moti Masjid", Toast.LENGTH_SHORT).show();
-            }
-        });
-        relative8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "Jama-Masjid");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Jama Masjid", Toast.LENGTH_SHORT).show();
-            }
-        });
-        relative9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "jantar mantar");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Jantar Mantar", Toast.LENGTH_SHORT).show();
-            }
-        });
-        relative10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "Victoria memorial");
-                startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Victoria Memorial", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
 
 
     private void EventChangeListener() {

@@ -18,6 +18,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Size;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -35,14 +36,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class ScannerActivity extends AppCompatActivity {
 
-    PreviewView previewView;
     private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
+
+    PreviewView previewView;
+    TextView textView;
+
     private int REQUEST_CODE_PERMISSION = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[] {"android.permission.CAMERA"};
     List<String> imagenet_classes;
@@ -52,8 +57,11 @@ public class ScannerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        previewView = findViewById(R.id.preview);
         setContentView(R.layout.activity_scanner);
+
+        previewView = findViewById(R.id.cameraView);
+        textView = findViewById(R.id.result_text);
+
         if(!checkPermissions()){
             ActivityCompat.requestPermissions(this,REQUIRED_PERMISSIONS,REQUEST_CODE_PERMISSION);
         };
@@ -65,9 +73,10 @@ public class ScannerActivity extends AppCompatActivity {
         cameraProviderListenableFuture.addListener(() -> {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderListenableFuture.get();
-                startcamera(cameraProvider);
-            }catch (ExecutionException | InterruptedException e){
+                startCamera(cameraProvider);
 
+            }catch (ExecutionException | InterruptedException e){
+            //errors
             }
         },ContextCompat.getMainExecutor(ScannerActivity.this));
     }
@@ -75,7 +84,7 @@ public class ScannerActivity extends AppCompatActivity {
     private boolean checkPermissions()
     {
         for(String permission: REQUIRED_PERMISSIONS){
-            if(ContextCompat.checkSelfPermission(this,permission)!= PackageManager.PERMISSION_GRANTED) {
+            if(ContextCompat.checkSelfPermission(this,permission) != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
         }
@@ -83,9 +92,10 @@ public class ScannerActivity extends AppCompatActivity {
     }
 
     Executor executor = Executors.newSingleThreadExecutor();
-    void startcamera(@NonNull ProcessCameraProvider cameraProvider){
+    void startCamera(@NonNull ProcessCameraProvider cameraProvider){
         Preview preview = new Preview.Builder().build();
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
+        preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
         ImageAnalysis imageAnalysis = new ImageAnalysis.Builder().setTargetResolution(new Size(224,224))
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
@@ -125,7 +135,7 @@ public class ScannerActivity extends AppCompatActivity {
 
     Module module;
     void analyzeImage(ImageProxy image,int rotation){
-        @SuppressLint("UnsafeOptInUsageError") Tensor inputTensor = TensorImageUtils.imageYUV420CenterCropToFloat32Tensor(image.getImage(),rotation,224,224,
+        @SuppressLint("UnsafeOptInUsageError") Tensor inputTensor = TensorImageUtils.imageYUV420CenterCropToFloat32Tensor(Objects.requireNonNull(image.getImage()),rotation,224,224,
                 TensorImageUtils.TORCHVISION_NORM_MEAN_RGB,TensorImageUtils.TORCHVISION_NORM_STD_RGB);
 
         Tensor outputTensor = module.forward(IValue.from(inputTensor)).toTensor();

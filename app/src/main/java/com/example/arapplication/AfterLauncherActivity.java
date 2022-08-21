@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,8 +46,13 @@ import java.util.ArrayList;
 public class AfterLauncherActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    ListView listView;
     DrawerLayout drawerLayout;
+    ArrayList<String> mnames;
     FrameLayout frameLayout;
+    ArrayList<String> filterList;
+
+    ArrayAdapter<String> adapter;
     ModelAdapter modelAdapter;
     MenuItem scanimage;
     ProgressDialog progressDialog;
@@ -56,6 +63,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
     TextView txtsuntemple;
     EditText search_action;
     Button search_voice_btn;
+    Model model;
 
 
     @Override
@@ -63,6 +71,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_launcher);
 
+        listView = findViewById(R.id.listview);
         //previewView = findViewById(R.id.preview);
 
 
@@ -109,24 +118,10 @@ public class AfterLauncherActivity extends AppCompatActivity {
                 Toast.makeText(AfterLauncherActivity.this,name,Toast.LENGTH_SHORT).show();
             }
         });
-        //search_action = findViewById(R.id.search);
-        /*search_action.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                //filter(editable.toString());
-            }
-        });*/
         recyclerView.setAdapter(modelAdapter);
+        Filter();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,filterList);
+        listView.setAdapter(adapter);
     }
 
     /*private void initialize() {
@@ -290,6 +285,23 @@ public class AfterLauncherActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setQueryHint("Type here to Search");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
         scanimage = menu.findItem(R.id.scanimage);
         scanimage.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -353,17 +365,16 @@ public class AfterLauncherActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode,data);
         }
 
-        /*public void filter(String text) {
-        ArrayList<Country> filterList = new ArrayList<>();
-        for(Country items: countryArrayList)
+        public void Filter() {
+        filterList = new ArrayList<>();
+        for(Model items: modelClassArrayList)
         {
-            if(items.getName().toLowerCase().contains(text.toLowerCase()))
+            if(items.getModel_name()!=null)
             {
-                filterList.add(items);
+                filterList.add(items.model_name);
             }
         }
-        myAdapter.filterList(filterList);
-    }*/
+    }
 
 
 }

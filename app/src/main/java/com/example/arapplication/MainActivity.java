@@ -64,12 +64,13 @@ public class MainActivity extends AppCompatActivity implements
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(MainActivity.this,"Successful",Toast.LENGTH_SHORT)
+                                    Toast.makeText(MainActivity.this," ",Toast.LENGTH_SHORT)
                                             .show();
                                     for(QueryDocumentSnapshot document: task.getResult()){
                                         Log.d(TAG,document.getId()+"=>" + document.getData());
                                         text=document.get("data").toString();
                                     }
+                                    speakOut();
                                 }
                                 else{
                                     Toast.makeText(MainActivity.this,"Failed",Toast.LENGTH_SHORT)
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements
                                 }
                             }
                         });
-                speakOut();
+
             }
 
 
@@ -168,8 +169,9 @@ public class MainActivity extends AppCompatActivity implements
     public void onInit(int status) {
 
         if (status == TextToSpeech.SUCCESS) {
-
-            int result = tts.setLanguage(Locale.US);
+            Locale locale=new Locale("en","in");
+            int result = tts.setLanguage(locale);
+//            tts.setSpeechRate(0.8f);
 
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {

@@ -1,34 +1,88 @@
 package com.example.arapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.assets.RenderableSource;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        TextToSpeech.OnInitListener {
+    private TextToSpeech tts;
+    private Button buttonSpeak;
+    private EditText editText;
+    FirebaseFirestore db;
+    static final String TAG="read data ";
 
 
     String modelname;
+    String text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db= FirebaseFirestore.getInstance();
+
+        tts = new TextToSpeech(this, this);
+        buttonSpeak = (Button) findViewById(R.id.button1);
+
+        buttonSpeak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+
+                db.collection("model_history").whereEqualTo("model_name",modelname)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(MainActivity.this,"Successful",Toast.LENGTH_SHORT)
+                                            .show();
+                                    for(QueryDocumentSnapshot document: task.getResult()){
+                                        Log.d(TAG,document.getId()+"=>" + document.getData());
+                                        text=document.get("data").toString();
+                                    }
+                                }
+                                else{
+                                    Toast.makeText(MainActivity.this,"Failed",Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            }
+                        });
+                speakOut();
+            }
+
+
+        });
+
 
 
         Intent intent = getIntent();
@@ -100,5 +154,47 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onDestroy() {
+// Don't forget to shutdown tts!
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onInit(int status) {
+
+        if (status == TextToSpeech.SUCCESS) {
+
+            int result = tts.setLanguage(Locale.US);
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            } else {
+                buttonSpeak.setEnabled(true);
+                speakOut();
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+
+    }
+
+    private void speakOut() {
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
 
 }

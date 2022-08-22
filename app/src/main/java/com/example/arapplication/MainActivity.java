@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(MainActivity.this," ",Toast.LENGTH_SHORT)
-                                            .show();
+//                                    Toast.makeText(MainActivity.this," ",Toast.LENGTH_SHORT)
+//                                            .show();
                                     for(QueryDocumentSnapshot document: task.getResult()){
                                         Log.d(TAG,document.getId()+"=>" + document.getData());
                                         text=document.get("data").toString();

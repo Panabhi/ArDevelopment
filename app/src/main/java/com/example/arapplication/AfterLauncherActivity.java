@@ -1,6 +1,8 @@
 package com.example.arapplication;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -35,6 +39,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -71,7 +76,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_launcher);
 
-        listView = findViewById(R.id.listview);
+        listView= findViewById(R.id.listView);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -100,7 +105,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
                 String name = model.getModel_name().toString();
                 intent.putExtra("model_name",name);
                 startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this,name,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AfterLauncherActivity.this,name,Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(modelAdapter);
@@ -127,7 +132,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
 
 
         } else if (itemId == R.id.search) {
-            Toast.makeText(this, "text Search", Toast.LENGTH_SHORT);
+
         } else {
             super.onBackPressed();
         }
@@ -165,19 +170,34 @@ public class AfterLauncherActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
 
         MenuItem item = menu.findItem(R.id.search);
+
         SearchView searchView = (SearchView) item.getActionView();
-        searchView.setQueryHint("Type here to Search");
+
+        //SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+       // SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+
+        //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        //searchView.setIconifiedByDefault(false);
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(String s) {
+                processsearch(s);
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+            public boolean onQueryTextChange(String s) {
+                //adapter.getFilter().filter(newText);
+                processsearch(s);
                 return false;
+            }
+            private void processsearch(String s) {
+                //FirebaseRecyclerOptions<model> options = new FirebaseRecyclerOptions.Builder<model>()
+                       // .setQuery(FirebaseDatabase.getInstance().getReference().child("data"),model.class)
+                       // .build();
+
             }
         });
 

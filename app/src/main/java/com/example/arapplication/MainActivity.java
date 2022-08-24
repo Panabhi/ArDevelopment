@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.assets.RenderableSource;
 import com.google.ar.sceneform.rendering.ModelRenderable;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements
 
     String modelname;
     String text;
+    public FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,9 @@ public class MainActivity extends AppCompatActivity implements
         db= FirebaseFirestore.getInstance();
 
         tts = new TextToSpeech(this, this);
-        buttonSpeak = (Button) findViewById(R.id.button1);
+        floatingActionButton = findViewById(R.id.button1);
 
-        buttonSpeak.setOnClickListener(new View.OnClickListener() {
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
 
@@ -177,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "This Language is not supported");
             } else {
-                buttonSpeak.setEnabled(true);
+                floatingActionButton.setEnabled(true);
                 speakOut();
             }
 

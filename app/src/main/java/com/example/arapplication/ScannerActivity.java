@@ -46,7 +46,7 @@ public class ScannerActivity extends AppCompatActivity {
     private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
 
     PreviewView previewView;
-    TextView textView;
+    //TextView textView;
 
     private int REQUEST_CODE_PERMISSION = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[] {"android.permission.CAMERA"};
@@ -60,7 +60,7 @@ public class ScannerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scanner);
 
         previewView = findViewById(R.id.cameraView);
-        textView = findViewById(R.id.result_text);
+        //textView = findViewById(R.id.result_text);
 
         if(!checkPermissions()){
             ActivityCompat.requestPermissions(this,REQUIRED_PERMISSIONS,REQUEST_CODE_PERMISSION);

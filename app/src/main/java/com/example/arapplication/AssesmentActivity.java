@@ -2,6 +2,8 @@ package com.example.arapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AssesmentActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -29,7 +32,7 @@ public class AssesmentActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_assesment);
 
         totalQuestionsTextView = findViewById(R.id.total_question);
         questionTextView = findViewById(R.id.question);
@@ -39,11 +42,11 @@ public class AssesmentActivity extends AppCompatActivity implements View.OnClick
         ansD = findViewById(R.id.ans_D);
         submitBtn = findViewById(R.id.submit_btn);
 
-        ansA.setOnClickListener(this);
-        ansB.setOnClickListener(this);
-        ansC.setOnClickListener(this);
-        ansD.setOnClickListener(this);
-        submitBtn.setOnClickListener(this);
+        ansA.setOnClickListener(AssesmentActivity.this);
+        ansB.setOnClickListener(AssesmentActivity.this);
+        ansC.setOnClickListener(AssesmentActivity.this);
+        ansD.setOnClickListener(AssesmentActivity.this);
+        submitBtn.setOnClickListener(AssesmentActivity.this);
 
         totalQuestionsTextView.setText("Total questions : "+totalQuestion);
 
@@ -66,6 +69,11 @@ public class AssesmentActivity extends AppCompatActivity implements View.OnClick
         if(clickedButton.getId()==R.id.submit_btn){
             if(selectedAnswer.equals(QuestionAnswer.correctAnswers[currentQuestionIndex])){
                 score++;
+                Toast.makeText(AssesmentActivity.this,"Correct Answer!!!",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(AssesmentActivity.this,"Incorrect Answer!!!",Toast.LENGTH_SHORT).show();
+
             }
             currentQuestionIndex++;
             loadNewQuestion();
@@ -99,17 +107,34 @@ public class AssesmentActivity extends AppCompatActivity implements View.OnClick
         String passStatus = "";
         if(score > totalQuestion*0.60){
             passStatus = "Passed";
+            //Intent intent = new Intent(AssesmentActivity.this,BravoActivity.class);
+            //startActivity(intent);
         }else{
             passStatus = "Failed";
         }
 
-        new AlertDialog.Builder(this)
-                .setTitle(passStatus)
-                .setMessage("Score is "+ score+" out of "+ totalQuestion)
-                .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz() )
-                .setCancelable(false)
-                .show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(passStatus);
 
+                builder.setMessage("Score is "+ score+" out of "+ totalQuestion);
+                builder.setCancelable(false);
+                builder.setPositiveButton("Restart",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        restartQuiz();
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(AssesmentActivity.this,ModelActivity.class);
+                        startActivity(intent);
+                        finish();
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.show();
 
     }
 

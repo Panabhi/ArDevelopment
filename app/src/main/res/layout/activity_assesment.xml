@@ -38,35 +38,38 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/ans_A"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ans_A"
             android:layout_margin="5dp"
             android:backgroundTint="@color/white"
             android:text="Ans A"
             android:textColor="@color/black"/>
 
         <Button
+            android:id="@+id/ans_B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ans_B"
+
             android:layout_margin="5dp"
             android:backgroundTint="@color/white"
             android:text="Ans B"
             android:textColor="@color/black"/>
 
         <Button
+            android:id="@+id/ans_C"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ans_C"
+
             android:layout_margin="5dp"
             android:backgroundTint="@color/white"
             android:text="Ans C"
             android:textColor="@color/black"/>
         <Button
+            android:id="@+id/ans_D"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ans_D"
+
             android:layout_margin="5dp"
             android:backgroundTint="@color/white"
             android:text="Ans D"
@@ -75,9 +78,10 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/submit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/submit_btn"
+
         android:text="Submit"
         android:layout_below="@id/choices_layout"
         android:layout_marginTop="40dp"/>

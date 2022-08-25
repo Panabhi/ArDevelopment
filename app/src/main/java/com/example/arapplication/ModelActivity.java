@@ -55,7 +55,7 @@ public class ModelActivity extends AppCompatActivity {
     Button fab;
     String modelname;
 
-    public FloatingActionButton floatingActionButton;
+    public FloatingActionButton floatingActionButton,fab2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +93,15 @@ public class ModelActivity extends AppCompatActivity {
         //modelArrayList = new ArrayList<ModelData>();
         //dataAdapter = new DataAdapter(this, modelArrayList);
 
+        fab2 = findViewById(R.id.fab2);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ModelActivity.this,AssesmentActivity.class);
+                startActivity(intent);
+                Toast.makeText(ModelActivity.this,"Quiz Started",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Intent intent = getIntent();
         modelname = intent.getStringExtra("model_name").toString();
@@ -107,8 +116,8 @@ public class ModelActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
              if(progressDialog.isShowing())
                  progressDialog.dismiss();
-                String modelinfo = documentSnapshot.getString("data").toString();
-             txtdata.setText(modelinfo);
+               // String modelinfo = documentSnapshot.getString("data").toString();
+             //txtdata.setText(modelinfo);
             }
         });
         FirebaseApp.initializeApp(this);

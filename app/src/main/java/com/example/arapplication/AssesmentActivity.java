@@ -72,7 +72,7 @@ public class AssesmentActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(AssesmentActivity.this,"Correct Answer!!!",Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(AssesmentActivity.this,"Incorrect Answer!!!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AssesmentActivity.this,"OOPS!! You can do it!!!",Toast.LENGTH_SHORT).show();
 
             }
             currentQuestionIndex++;

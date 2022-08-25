@@ -7,10 +7,11 @@
     tools:context=".Activity2Activity">
 
     <ImageView
-        android:id="@+id/imgactivity"
+        android:id="@+id/imgpuzzel"
         android:layout_width="171dp"
         android:layout_height="184dp"
-        android:src="@drawable/imgactivity"
+        android:src="@drawable/puzzel"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.933"
@@ -19,10 +20,10 @@
         app:layout_constraintVertical_bias="0.458" />
 
     <ImageView
-        android:id="@+id/imgmonuments"
+        android:id="@+id/imgquiz"
         android:layout_width="171dp"
         android:layout_height="184dp"
-        android:src="@drawable/imgmonuments"
+        android:src="@drawable/quiz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.108"

@@ -11,6 +11,7 @@ public class ModelClass {
 
     String model_name;
 
-    public ModelClass() {}
+    public ModelClass() {
     }
+}
 

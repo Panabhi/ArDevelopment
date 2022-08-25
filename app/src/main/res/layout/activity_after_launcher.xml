@@ -24,6 +24,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
+                android:background="@drawable/toolbarbg"
                 android:layout_height="?attr/actionBarSize"/>
             </com.google.android.material.appbar.AppBarLayout>
         </RelativeLayout>
@@ -35,7 +36,7 @@
                 android:id="@+id/gridlayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/bgcolor"
+                android:background="@drawable/backg"
                 android:columnCount="2"
                 android:rowCount="7">
 
@@ -168,6 +169,7 @@
                             android:id="@+id/imgqutubminar"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
+
                             android:src="@drawable/qutubminar" />
 
                         <TextView
@@ -178,6 +180,7 @@
                             android:layout_alignParentBottom="true"
                             android:gravity="center"
                             android:text="Qutub Minar"
+
                             android:textSize="18sp" />
 
                     </RelativeLayout>

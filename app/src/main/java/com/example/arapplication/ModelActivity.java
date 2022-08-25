@@ -132,7 +132,9 @@ public class ModelActivity extends AppCompatActivity {
 
             try {
                 File file= File.createTempFile(modelname,"glb");
-                modelRef.getFile(file).addOnSuccessListener(taskSnapshot -> buildModel(file));
+                modelRef.getFile(file).addOnSuccessListener(taskSnapshot -> {
+                    buildModel(file);
+                });
 
             } catch (IOException e) {
                 e.printStackTrace();

@@ -131,7 +131,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "Sun_Temple");
+                intent.putExtra("model_name", "sunTemple");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Sun Temple", Toast.LENGTH_SHORT).show();
             }
@@ -140,16 +140,16 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "Red_Fort");
+                intent.putExtra("model_name","Gol_Gumbaz");
                 startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Red Fort", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AfterLauncherActivity.this, "Gol Gumbaz", Toast.LENGTH_SHORT).show();
             }
         });
         relative3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "IndiaGate");
+                intent.putExtra("model_name", "India_Gate");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "India Gate", Toast.LENGTH_SHORT).show();
             }
@@ -167,7 +167,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "GatewayofIndia");
+                intent.putExtra("model_name", "Gateway_Of_India");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Gateway of India", Toast.LENGTH_SHORT).show();
             }
@@ -212,7 +212,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "Victoria_Memorial");
+                intent.putExtra("model_name", "Victoria_memorial");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Victoria Memorial", Toast.LENGTH_SHORT).show();
             }

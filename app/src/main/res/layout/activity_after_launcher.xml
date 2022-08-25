@@ -93,19 +93,19 @@
                         android:padding="8dp">
 
                         <ImageView
-                            android:id="@+id/imgredfort"
+                            android:id="@+id/imggolgumbaz"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:src="@drawable/redfort" />
+                            android:src="@drawable/golgumbaz" />
 
                         <TextView
                             android:id="@+id/txtredfort"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/imgredfort"
+                            android:layout_below="@id/imggolgumbaz"
                             android:layout_alignParentBottom="true"
                             android:gravity="center"
-                            android:text="Red Fort"
+                            android:text="Gol Gumbaz"
                             android:textSize="18sp" />
 
                     </RelativeLayout>

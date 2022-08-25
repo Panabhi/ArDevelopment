@@ -237,6 +237,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
 
 
         } else if (itemId == R.id.search) {
+//            EventChangeListener();
 
         } else {
             super.onBackPressed();
@@ -276,13 +277,15 @@ public class AfterLauncherActivity extends AppCompatActivity {
 
         MenuItem item = menu.findItem(R.id.search);
 
-        SearchView searchView = (SearchView) item.getActionView();
+//        SearchView searchView = (SearchView) item.getActionView();
 
         //SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-       // SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
 
         //searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         //searchView.setIconifiedByDefault(false);
+
+        searchView.setQueryHint("type here to search");
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -290,7 +293,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String s) {
                 return false;
             }
-
+//
             @Override
             public boolean onQueryTextChange(String s) {
                 arrayAdapter.getFilter().filter(s);
@@ -298,15 +301,15 @@ public class AfterLauncherActivity extends AppCompatActivity {
             }
         });
 
-        scanimage = menu.findItem(R.id.scanimage);
-        scanimage.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(AfterLauncherActivity.this,ScannerActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        });
+//        scanimage = menu.findItem(R.id.scanimage);
+//        scanimage.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                Intent intent = new Intent(AfterLauncherActivity.this,ScannerActivity.class);
+//                startActivity(intent);
+//                return true;
+//            }
+//        });
         return true;
     }
 

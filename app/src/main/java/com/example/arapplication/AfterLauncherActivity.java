@@ -131,7 +131,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "sunTemple");
+                intent.putExtra("model_name", "Sun_Temple");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Sun Temple", Toast.LENGTH_SHORT).show();
             }
@@ -140,7 +140,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "RedFort");
+                intent.putExtra("model_name", "Red_Fort");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Red Fort", Toast.LENGTH_SHORT).show();
             }
@@ -158,7 +158,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "Qutub Minar");
+                intent.putExtra("model_name", "Qutub_Minar");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Qutub Minar", Toast.LENGTH_SHORT).show();
             }
@@ -176,7 +176,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "mysore palace");
+                intent.putExtra("model_name", "Mysore_Palace");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Mysore Palace", Toast.LENGTH_SHORT).show();
             }
@@ -185,7 +185,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "moti masjid");
+                intent.putExtra("model_name", "Moti_Masjid");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Moti Masjid", Toast.LENGTH_SHORT).show();
             }
@@ -194,7 +194,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "Jama-Masjid");
+                intent.putExtra("model_name", "Jama_Masjid");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Jama Masjid", Toast.LENGTH_SHORT).show();
             }
@@ -212,7 +212,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
-                intent.putExtra("model_name", "Victoria memorial");
+                intent.putExtra("model_name", "Victoria_Memorial");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Victoria Memorial", Toast.LENGTH_SHORT).show();
             }

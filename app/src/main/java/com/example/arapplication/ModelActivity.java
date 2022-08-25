@@ -107,8 +107,8 @@ public class ModelActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
              if(progressDialog.isShowing())
                  progressDialog.dismiss();
-                String modelinfo = documentSnapshot.getString("data").toString();
-             txtdata.setText(modelinfo);
+//                String modelinfo = documentSnapshot.getString("data").toString();
+//             txtdata.setText(modelinfo);
             }
         });
         FirebaseApp.initializeApp(this);

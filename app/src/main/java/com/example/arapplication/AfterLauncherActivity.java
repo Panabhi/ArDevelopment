@@ -65,10 +65,6 @@ public class AfterLauncherActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseFirestore db;
     RelativeLayout relative1, relative2, relative3, relative4, relative5, relative6, relative7, relative8, relative9, relative10;
-    TextView txtsuntemple;
-    EditText search_action;
-    Button search_voice_btn;
-    Model model;
 
 
     @Override
@@ -78,26 +74,26 @@ public class AfterLauncherActivity extends AppCompatActivity {
 
         listView= findViewById(R.id.listView);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-         progressDialog.setMessage("Loading List");
-        progressDialog.show();
+    //    progressDialog = new ProgressDialog(this);
+      //  progressDialog.setCancelable(false);
+        // progressDialog.setMessage("Loading List");
+        //progressDialog.show();
         toolbar = findViewById(R.id.toolbar);
 
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
-        recyclerView= findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-        db = FirebaseFirestore.getInstance();
-        frameLayout = findViewById(R.id.framelayout);
-        modelClassArrayList = new ArrayList<Model>();
+       // recyclerView= findViewById(R.id.recyclerview);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setHasFixedSize(true);
+       // db = FirebaseFirestore.getInstance();
+        //frameLayout = findViewById(R.id.framelayout);
+        //modelClassArrayList = new ArrayList<Model>();
         if(toolbar!=null)
         {
             setSupportActionBar(toolbar);
         }
 
-        EventChangeListener();
+        /*EventChangeListener();
         modelAdapter = new ModelAdapter(AfterLauncherActivity.this, modelClassArrayList, new ModelAdapter.ItemClickListener() {
             @Override
             public void OnItemClick(Model model) {
@@ -111,7 +107,110 @@ public class AfterLauncherActivity extends AppCompatActivity {
         recyclerView.setAdapter(modelAdapter);
         Filter();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,filterList);
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);*/
+        relative1 = findViewById(R.id.relative1);
+        relative2 = findViewById(R.id.relative2);
+        relative3 = findViewById(R.id.relative3);
+        relative4 = findViewById(R.id.relative4);
+        relative5 = findViewById(R.id.relative5);
+        relative6 = findViewById(R.id.relative6);
+        relative7 = findViewById(R.id.relative7);
+        relative8 = findViewById(R.id.relative8);
+        relative9 = findViewById(R.id.relative9);
+        relative10 = findViewById(R.id.relative10);
+        initclicklistners();
+    }
+    private void initclicklistners() {
+        relative1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "sunTemple");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "Sun Temple", Toast.LENGTH_SHORT).show();
+            }
+        });
+        relative2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "RedFort");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "Red Fort", Toast.LENGTH_SHORT).show();
+            }
+        });
+        relative3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "IndiaGate");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "India Gate", Toast.LENGTH_SHORT).show();
+            }
+        });
+        relative4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "Qutub Minar");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "Qutub Minar", Toast.LENGTH_SHORT).show();
+            }
+        });
+        relative5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "GatewayofIndia");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "Gateway of India", Toast.LENGTH_SHORT).show();
+            }
+        });
+        relative6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "mysore palace");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "Mysore Palace", Toast.LENGTH_SHORT).show();
+            }
+        });
+        relative7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "moti masjid");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "Moti Masjid", Toast.LENGTH_SHORT).show();
+            }
+        });
+        relative8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "Jama-Masjid");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "Jama Masjid", Toast.LENGTH_SHORT).show();
+            }
+        });
+        relative9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "jantar mantar");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "Jantar Mantar", Toast.LENGTH_SHORT).show();
+            }
+        });
+        relative10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                intent.putExtra("model_name", "Victoria memorial");
+                startActivity(intent);
+                Toast.makeText(AfterLauncherActivity.this, "Victoria Memorial", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

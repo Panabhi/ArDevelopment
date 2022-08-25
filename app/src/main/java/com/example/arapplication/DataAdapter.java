@@ -36,7 +36,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return modelDataArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

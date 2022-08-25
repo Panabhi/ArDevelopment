@@ -57,16 +57,19 @@ public class AfterLauncherActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     ArrayList<String> filterList;
 
+    SearchView searchView;
     ArrayAdapter<String> adapter;
     ModelAdapter modelAdapter;
     MenuItem scanimage;
     ProgressDialog progressDialog;
     ArrayList<Model> modelClassArrayList;
+    ArrayAdapter<String> arrayAdapter;
     RecyclerView recyclerView;
     FirebaseFirestore db;
     RelativeLayout relative1, relative2, relative3, relative4, relative5, relative6, relative7, relative8, relative9, relative10;
 
-
+    String[] filterarray ={"Sanchi Stupa","Taj Mahal","Sun Temple","India Gate","Qutub Minar","Gateway of India","Mysore Palace",
+    "Red Fort","Jama Masjid","Moti Masjid","Victoria Memorial"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,12 +122,15 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative9 = findViewById(R.id.relative9);
         relative10 = findViewById(R.id.relative10);
         initclicklistners();
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,filterarray);
+        listView.setAdapter(arrayAdapter);
+
     }
     private void initclicklistners() {
         relative1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "sunTemple");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Sun Temple", Toast.LENGTH_SHORT).show();
@@ -133,7 +139,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "RedFort");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Red Fort", Toast.LENGTH_SHORT).show();
@@ -142,7 +148,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "IndiaGate");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "India Gate", Toast.LENGTH_SHORT).show();
@@ -151,7 +157,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "Qutub Minar");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Qutub Minar", Toast.LENGTH_SHORT).show();
@@ -160,7 +166,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "GatewayofIndia");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Gateway of India", Toast.LENGTH_SHORT).show();
@@ -169,7 +175,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "mysore palace");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Mysore Palace", Toast.LENGTH_SHORT).show();
@@ -178,7 +184,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "moti masjid");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Moti Masjid", Toast.LENGTH_SHORT).show();
@@ -187,7 +193,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "Jama-Masjid");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Jama Masjid", Toast.LENGTH_SHORT).show();
@@ -196,7 +202,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "Sanchi_Stupa");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Sanchi Stupa", Toast.LENGTH_SHORT).show();
@@ -205,7 +211,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
         relative10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
+                Intent intent = new Intent(AfterLauncherActivity.this, ModelActivity.class);
                 intent.putExtra("model_name", "Victoria memorial");
                 startActivity(intent);
                 Toast.makeText(AfterLauncherActivity.this, "Victoria Memorial", Toast.LENGTH_SHORT).show();
@@ -282,21 +288,13 @@ public class AfterLauncherActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                processsearch(s);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                //adapter.getFilter().filter(newText);
-                processsearch(s);
+                arrayAdapter.getFilter().filter(s);
                 return false;
-            }
-            private void processsearch(String s) {
-                //FirebaseRecyclerOptions<model> options = new FirebaseRecyclerOptions.Builder<model>()
-                       // .setQuery(FirebaseDatabase.getInstance().getReference().child("data"),model.class)
-                       // .build();
-
             }
         });
 
@@ -363,7 +361,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode,data);
         }
 
-        public void Filter() {
+/*        public void Filter() {
         filterList = new ArrayList<>();
         for(Model items: modelClassArrayList)
         {
@@ -372,7 +370,7 @@ public class AfterLauncherActivity extends AppCompatActivity {
                 filterList.add(items.model_name);
             }
         }
-    }
+    }*/
 
 
 }

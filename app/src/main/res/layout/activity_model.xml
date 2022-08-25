@@ -6,10 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ModelActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!-- Circular Image View  -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circularimage"
+        app:civ_border_width="4dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/clouddownload"
+        app:civ_border_color="#FF000000"
+        android:layout_width="300dp"
+        android:layout_height="300dp"/>
+    </RelativeLayout>
     <TextView
         android:id="@+id/txtsetdata"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:textSize="20sp"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="59dp"
@@ -27,6 +42,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="59dp"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:contentDescription="@string/download"
+        android:src="@drawable/quiz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.959" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

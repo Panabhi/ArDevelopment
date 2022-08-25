@@ -20,8 +20,10 @@ import com.example.arapplication.DataAdapter;
 import com.example.arapplication.MainActivity;
 import com.example.arapplication.ModelData;
 import com.example.arapplication.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.sceneform.assets.RenderableSource;
 import com.google.ar.sceneform.rendering.ModelRenderable;
@@ -32,14 +34,18 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ModelActivity extends AppCompatActivity {
 
@@ -47,21 +53,24 @@ public class ModelActivity extends AppCompatActivity {
     DataAdapter dataAdapter;
     FirebaseFirestore fb;
     RecyclerView recyclerView;
+    CircleImageView imageView;
     TextView textView;
     ProgressDialog progressDialog;
+    static final String TAG="read data ";
 
     TextView txtdata;
     Button launch;
     Button fab;
     String modelname;
 
-    public FloatingActionButton floatingActionButton;
+    public FloatingActionButton floatingActionButton,fab2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_model);
 
+        imageView = findViewById(R.id.circularimage);
         txtdata = findViewById(R.id.txtsetdata);
         /*FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("data");
@@ -92,6 +101,15 @@ public class ModelActivity extends AppCompatActivity {
         fb = FirebaseFirestore.getInstance();
         //modelArrayList = new ArrayList<ModelData>();
         //dataAdapter = new DataAdapter(this, modelArrayList);
+        fab2 = findViewById(R.id.fab2);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ModelActivity.this,AssesmentActivity.class);
+                startActivity(intent);
+                Toast.makeText(ModelActivity.this,"Quiz Started",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         Intent intent = getIntent();
@@ -102,15 +120,52 @@ public class ModelActivity extends AppCompatActivity {
     }
 
     private void ModelEventListener() {
-        fb.collection("model_history").document(modelname).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-             if(progressDialog.isShowing())
-                 progressDialog.dismiss();
-//                String modelinfo = documentSnapshot.getString("data").toString();
+//        fb.collection("model_history").document(modelname).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//             if(progressDialog.isShowing())
+//                 progressDialog.dismiss();
+////             if(documentSnapshot!=null){
+////             String modelinfo = documentSnapshot.getString("data").toString();
+////             txtdata.setText(modelinfo);
+////            }
+////             else {
+////                 progressDialog.dismiss();
+////                 Toast.makeText(ModelActivity.this,"Data Not found",Toast.LENGTH_SHORT).show();
+////             }
+//                String modelinfo =modelname;
 //             txtdata.setText(modelinfo);
-            }
-        });
+//
+//             }
+//
+//        });
+        fb.collection("model_history").whereEqualTo("model_name",modelname)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(progressDialog.isShowing())
+                        {
+                            progressDialog.dismiss();
+                        }
+                        if(task.isSuccessful()){
+//                                    Toast.makeText(MainActivity.this," ",Toast.LENGTH_SHORT)
+//                                            .show();
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                Log.d(TAG,document.getId()+"=>" + document.getData());
+                                String text=document.get("data").toString();
+                                txtdata.setText(text);
+                                Picasso.with(ModelActivity.this).load(document.get("url").toString()).into(imageView);
+
+                            }
+
+                        }
+                        else{
+                            Toast.makeText(ModelActivity.this,"Failed",Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }
+                });
         FirebaseApp.initializeApp(this);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();

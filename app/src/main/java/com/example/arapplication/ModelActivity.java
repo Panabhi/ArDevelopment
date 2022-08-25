@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,12 +20,15 @@ import com.example.arapplication.DataAdapter;
 import com.example.arapplication.MainActivity;
 import com.example.arapplication.ModelData;
 import com.example.arapplication.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.ar.sceneform.assets.RenderableSource;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -35,6 +39,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ModelActivity extends AppCompatActivity {
 
@@ -45,6 +50,7 @@ public class ModelActivity extends AppCompatActivity {
     TextView textView;
     ProgressDialog progressDialog;
 
+    TextView txtdata;
     Button launch;
     Button fab;
     String modelname;
@@ -56,6 +62,7 @@ public class ModelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_model);
 
+        txtdata = findViewById(R.id.txtsetdata);
         /*FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("data");
 
@@ -79,41 +86,31 @@ public class ModelActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading");
         progressDialog.show();
         // launch = findViewById(R.id.launch);
-        recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView = findViewById(R.id.recyclerview);
+        //recyclerView.setHasFixedSize(true);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
         fb = FirebaseFirestore.getInstance();
-        modelArrayList = new ArrayList<ModelData>();
-        dataAdapter = new DataAdapter(this, modelArrayList);
+        //modelArrayList = new ArrayList<ModelData>();
+        //dataAdapter = new DataAdapter(this, modelArrayList);
 
 
+        Intent intent = getIntent();
+        modelname = intent.getStringExtra("model_name").toString();
         ModelEventListener();
 
-        recyclerView.setAdapter(dataAdapter);
+        //recyclerView.setAdapter(dataAdapter);
     }
 
     private void ModelEventListener() {
-        fb.collection("model_history").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        fb.collection("model_history").document(modelname).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                        if (progressDialog.isShowing())
-                            progressDialog.dismiss();
-                        Log.e("Firestore error", error.getMessage());
-                        return;
-                    }
-                    for (DocumentChange dc : value.getDocumentChanges()) {
-                        if (dc.getType() == DocumentChange.Type.ADDED) {
-                            modelArrayList.add(dc.getDocument().toObject(ModelData.class));
-                        }
-                        dataAdapter.notifyDataSetChanged();
-                        if (progressDialog.isShowing())
-                            progressDialog.dismiss();
-                    }
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+             if(progressDialog.isShowing())
+                 progressDialog.dismiss();
+                String modelinfo = documentSnapshot.getString("data").toString();
+             txtdata.setText(modelinfo);
             }
         });
-        Intent intent = getIntent();
-        modelname = intent.getStringExtra("model_name").toString();
         FirebaseApp.initializeApp(this);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();

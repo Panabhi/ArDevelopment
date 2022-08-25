@@ -21,5 +21,15 @@ public class Model {
 
     String model_name;
 
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    String data;
+
     public Model(){}
 }

@@ -80,8 +80,9 @@ public class MainActivity extends AppCompatActivity implements
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         langlistener("hindata");
+                        var=1;
                         dialog.dismiss();
-                        var =1;
+
                     }
                 });
                 builder.show();
@@ -195,19 +196,27 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onInit(int status) {
 
-        Locale locale;
+      Locale locale;
         int result;
+
         if (status == TextToSpeech.SUCCESS) {
-            if(var==1) {
+            if(var == 1) {
                 locale = new Locale("hi", "in");
                 result = tts.setLanguage(locale);
-                Toast.makeText(MainActivity.this,var,Toast.LENGTH_SHORT).show();
+////                Toast.makeText(MainActivity.this,var,Toast.LENGTH_SHORT).show();
             }
             else {
                 locale = new Locale("en", "in");
                 result = tts.setLanguage(locale);
 
             }
+
+
+
+         
+
+
+
 //            tts.setSpeechRate(0.8f);
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -233,6 +242,4 @@ public class MainActivity extends AppCompatActivity implements
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
-
-
 }

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements
 
     String eng = "data";
     String hin = "hindata";
-    String var="";
+    int var;
 
     String modelname;
     String text;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements
                     public void onClick(DialogInterface dialog, int which) {
                         langlistener("data");
                         dialog.dismiss();
-                        var="English";
+                        var=0;
                     }
                 });
                 builder.setNegativeButton("Hindi", new DialogInterface.OnClickListener() {
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements
                     public void onClick(DialogInterface dialog, int which) {
                         langlistener("hindata");
                         dialog.dismiss();
-                        var ="hindi";
+                        var =1;
                     }
                 });
                 builder.show();
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements
         Locale locale;
         int result;
         if (status == TextToSpeech.SUCCESS) {
-            if(var.equals("hindi")) {
+            if(var==1) {
                 locale = new Locale("hi", "in");
                 result = tts.setLanguage(locale);
                 Toast.makeText(MainActivity.this,var,Toast.LENGTH_SHORT).show();

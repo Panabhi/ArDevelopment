@@ -1,8 +1,10 @@
 package com.example.arapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements
     FirebaseFirestore db;
     static final String TAG="read data ";
 
+    String eng = "data";
+    String hin = "hindata";
+    String var="";
 
     String modelname;
     String text;
@@ -59,31 +64,28 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View arg0) {
 
-
-                db.collection("model_history").whereEqualTo("model_name",modelname)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
-//                                    Toast.makeText(MainActivity.this," ",Toast.LENGTH_SHORT)
-//                                            .show();
-                                    for(QueryDocumentSnapshot document: task.getResult()){
-                                        Log.d(TAG,document.getId()+"=>" + document.getData());
-                                        text=document.get("data").toString();
-                                    }
-                                    speakOut();
-                                }
-                                else{
-                                    Toast.makeText(MainActivity.this,"Failed",Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                            }
-                        });
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Alert!");
+                builder.setMessage("Select Language");
+                builder.setCancelable(false);
+                builder.setPositiveButton("English", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        langlistener("data");
+                        dialog.dismiss();
+                        var="English";
+                    }
+                });
+                builder.setNegativeButton("Hindi", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        langlistener("hindata");
+                        dialog.dismiss();
+                        var ="hindi";
+                    }
+                });
+                builder.show();
             }
-
-
         });
 
 
@@ -132,6 +134,29 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    private void langlistener(String lang) {
+        db.collection("model_history").whereEqualTo("model_name",modelname)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+//                                    Toast.makeText(MainActivity.this," ",Toast.LENGTH_SHORT)
+//                                            .show();
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                Log.d(TAG,document.getId()+"=>" + document.getData());
+                                text=document.get(lang).toString();
+                            }
+                            speakOut();
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this,"Failed",Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }
+                });
+    }
+
     private ModelRenderable renderable ;
     private void buildModel(File file) {
 
@@ -170,11 +195,20 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onInit(int status) {
 
+        Locale locale;
+        int result;
         if (status == TextToSpeech.SUCCESS) {
-            Locale locale=new Locale("en","in");
-            int result = tts.setLanguage(locale);
-//            tts.setSpeechRate(0.8f);
+            if(var.equals("hindi")) {
+                locale = new Locale("hi", "in");
+                result = tts.setLanguage(locale);
+                Toast.makeText(MainActivity.this,var,Toast.LENGTH_SHORT).show();
+            }
+            else {
+                locale = new Locale("en", "in");
+                result = tts.setLanguage(locale);
 
+            }
+//            tts.setSpeechRate(0.8f);
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "This Language is not supported");

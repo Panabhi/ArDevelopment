@@ -348,13 +348,13 @@
                             android:id="@+id/imgstupa"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:src="@drawable/jantarmantar" />
+                            android:src="@drawable/stupa" />
 
                         <TextView
                             android:id="@+id/txtstupa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/imgjantarmantar"
+                            android:layout_below="@id/imgstupa"
                             android:layout_alignParentBottom="true"
                             android:gravity="center"
                             android:text="Sanchi Stupa"

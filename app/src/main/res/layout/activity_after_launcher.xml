@@ -345,19 +345,19 @@
                         android:padding="8dp">
 
                         <ImageView
-                            android:id="@+id/imgjantarmantar"
+                            android:id="@+id/imgstupa"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:src="@drawable/jantarmantar" />
 
                         <TextView
-                            android:id="@+id/txtjantarmantar"
+                            android:id="@+id/txtstupa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/imgjantarmantar"
                             android:layout_alignParentBottom="true"
                             android:gravity="center"
-                            android:text="Jantar Mantar"
+                            android:text="Sanchi Stupa"
                             android:textSize="18sp" />
 
                     </RelativeLayout>

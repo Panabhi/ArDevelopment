@@ -197,9 +197,9 @@ public class AfterLauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfterLauncherActivity.this, VoicePresentActivity.class);
-                intent.putExtra("model_name", "jantar mantar");
+                intent.putExtra("model_name", "Sanchi_Stupa");
                 startActivity(intent);
-                Toast.makeText(AfterLauncherActivity.this, "Jantar Mantar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AfterLauncherActivity.this, "Sanchi Stupa", Toast.LENGTH_SHORT).show();
             }
         });
         relative10.setOnClickListener(new View.OnClickListener() {

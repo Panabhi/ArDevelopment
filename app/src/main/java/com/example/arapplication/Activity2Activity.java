@@ -19,7 +19,7 @@ public class Activity2Activity extends AppCompatActivity {
         btnquiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity2Activity.this,AssesmentActivity.class);
+                Intent intent = new Intent(Activity2Activity.this, Assesment2Activity.class);
                 startActivity(intent);
             }
         });

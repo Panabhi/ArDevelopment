@@ -37,6 +37,12 @@
         android:theme="@style/Theme.ArApplication"
         tools:targetApi="31">
         <activity
+            android:name=".Assisment3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Assesment1Activity"
+            android:exported="false" />
+        <activity
             android:name=".Activity2Activity"
             android:exported="false" />
         <activity
@@ -46,7 +52,7 @@
             android:name=".BravoActivity"
             android:exported="false" />
         <activity
-            android:name=".AssesmentActivity"
+            android:name=".Assesment2Activity"
             android:exported="false" />
         <activity
             android:name=".ScannerActivity"

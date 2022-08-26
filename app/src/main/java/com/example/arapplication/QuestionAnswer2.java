@@ -1,14 +1,14 @@
 package com.example.arapplication;
 
-public class QuestionAnswer {
+public class QuestionAnswer2 {
 
     public static String question[] ={
-            "In which village of Mehsana city (Gujarat) is the sun temple present?",
-            "Char Minar was built in which year?",
-            "Qutub Minar was built in which year?",
-            "Jantar Mantar is situated in__________.",
-            "Gateway of India is situated in____________.",
-            "Akbar Sikandra is situated in__________."
+            "Q1) In which village of Mehsana city (Gujarat) is the sun temple present?",
+            "Q2) Char Minar was built in which year?",
+            "Q3) Qutub Minar was built in which year?",
+            "Q4) Jantar Mantar is situated in__________.",
+            "Q5) Gateway of India is situated in____________.",
+            "Q6) Akbar Sikandra is situated in__________."
     };
 
     public static String choices[][] = {
